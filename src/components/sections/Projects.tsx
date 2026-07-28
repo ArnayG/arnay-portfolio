@@ -3,48 +3,59 @@ import { projects } from "@/data/projects";
 
 export default function Projects() {
   return (
-    <Section id="projects" title="Projects">
-      <ul className="grid gap-4 sm:grid-cols-2">
-        {projects.map((project) => (
+    <Section id="projects" title="Projects" kicker={`${projects.length} selected`}>
+      <ul className="grid gap-px border border-rule bg-rule sm:grid-cols-2">
+        {projects.map((project, index) => (
           <li
-            key={project.title}
-            className="flex flex-col rounded-lg border border-border bg-surface p-5 transition-colors hover:border-accent"
+            key={index}
+            className="flex flex-col bg-paper p-5 transition-colors hover:bg-paper/60"
           >
-            <h3 className="text-lg font-medium">{project.title}</h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-muted">
+            <p className="font-mono text-[10px] tracking-[0.2em] text-ink-muted uppercase">
+              {project.category}
+              {project.period ? ` · ${project.period}` : ""}
+            </p>
+
+            <h3 className="mt-1.5 text-lg font-medium">{project.title}</h3>
+
+            <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-muted">
               {project.description}
             </p>
-            <ul className="mt-4 flex flex-wrap gap-2">
-              {project.stack.map((tech) => (
-                <li key={tech} className="font-mono text-xs text-muted">
+
+            <ul className="mt-4 flex flex-wrap gap-x-3 gap-y-1">
+              {project.stack.map((tech, techIndex) => (
+                <li
+                  key={techIndex}
+                  className="font-mono text-[10px] tracking-[0.14em] text-ink-muted uppercase"
+                >
                   {tech}
                 </li>
               ))}
             </ul>
-            {(project.repo || project.demo) && (
-              <div className="mt-4 flex gap-4 text-sm">
-                {project.repo && (
+
+            {project.repo || project.demo ? (
+              <div className="mt-4 flex gap-4">
+                {project.repo ? (
                   <a
                     href={project.repo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-accent hover:underline"
+                    className="font-mono text-[11px] tracking-[0.14em] uppercase underline decoration-rule underline-offset-4 transition-colors hover:decoration-ink"
                   >
                     Code
                   </a>
-                )}
-                {project.demo && (
+                ) : null}
+                {project.demo ? (
                   <a
                     href={project.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-accent hover:underline"
+                    className="font-mono text-[11px] tracking-[0.14em] uppercase underline decoration-rule underline-offset-4 transition-colors hover:decoration-ink"
                   >
-                    Live demo
+                    Live
                   </a>
-                )}
+                ) : null}
               </div>
-            )}
+            ) : null}
           </li>
         ))}
       </ul>

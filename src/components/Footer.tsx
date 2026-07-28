@@ -1,14 +1,15 @@
+import Container from "@/components/Container";
 import { site } from "@/data/site";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border">
-      <div className="mx-auto flex max-w-4xl flex-col items-center justify-between gap-2 px-6 py-8 text-sm text-muted sm:flex-row">
+    <footer className="border-t border-rule">
+      <Container className="flex flex-col items-center justify-between gap-2 py-8 font-mono text-[10px] tracking-[0.18em] text-ink-muted uppercase sm:flex-row">
         <p>
-          © {new Date().getFullYear()} {site.name}
+          © {new Date().getFullYear()} {site.firstName} {site.lastName}
         </p>
-        <p className="font-mono text-xs">Built with Next.js &amp; Tailwind CSS</p>
-      </div>
+        <p>Next.js · Tailwind CSS</p>
+      </Container>
     </footer>
   );
 }

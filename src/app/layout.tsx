@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Archivo, Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { site } from "@/data/site";
@@ -15,10 +15,31 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// `weight` is omitted so both styles load the full variable 100–900 range.
+// Archivo's italic is a separate file, not an axis, hence the style array.
+const archivo = Archivo({
+  variable: "--font-archivo",
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const fullName = `${site.firstName} ${site.lastName}`;
+
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.role}`,
+  title: `${fullName} — ${site.role}`,
   description: site.summary,
 };
+
+/** Applies the stored theme before first paint so there's no flash. */
+const themeScript = `
+try {
+  var t = localStorage.getItem('theme');
+  if (t === 'dark' || (!t && matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  }
+} catch (e) {}
+`;
 
 export default function RootLayout({
   children,
@@ -28,11 +49,15 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${archivo.variable} antialiased`}
+      suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col font-sans">
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="dot-grid flex min-h-dvh flex-col font-sans">
         <Navbar />
-        <main className="mx-auto w-full max-w-4xl flex-1 px-6">{children}</main>
+        <main className="flex-1">{children}</main>
         <Footer />
       </body>
     </html>

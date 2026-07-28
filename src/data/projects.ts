@@ -1,7 +1,10 @@
 export type Project = {
   title: string;
+  /** Short grouping label, e.g. "Robotics", "Web". */
+  category: string;
   description: string;
   stack: string[];
+  period?: string;
   repo?: string;
   demo?: string;
 };
@@ -9,24 +12,28 @@ export type Project = {
 /** TODO: replace these placeholders with your real projects. */
 export const projects: Project[] = [
   {
-    title: "Project One",
+    title: "TODO: Robotics project",
+    category: "Robotics",
     description:
-      "TODO: one or two sentences on what the project does, who it's for, and the hardest problem you solved building it.",
-    stack: ["TypeScript", "React", "Node.js"],
+      "TODO: what it did, what you were responsible for, and the hardest problem you solved.",
+    stack: ["TODO", "TODO"],
+    period: "TODO",
+  },
+  {
+    title: "TODO: First website",
+    category: "Web",
+    description:
+      "TODO: who it was for and what it needed to do. Lead with impact where you have it.",
+    stack: ["TODO", "TODO"],
+    period: "TODO",
     repo: "https://github.com/ArnayG",
   },
   {
-    title: "Project Two",
-    description:
-      "TODO: lead with impact where you can — users served, latency cut, data processed.",
-    stack: ["Python", "FastAPI", "PostgreSQL"],
-    repo: "https://github.com/ArnayG",
-  },
-  {
-    title: "Project Three",
-    description:
-      "TODO: a third project rounds out the section. Drop this entry if you'd rather show two strong ones.",
-    stack: ["Java", "Spring"],
+    title: "TODO: Second website",
+    category: "Web",
+    description: "TODO: another site. Drop this entry if two is enough.",
+    stack: ["TODO"],
+    period: "TODO",
     repo: "https://github.com/ArnayG",
   },
 ];
