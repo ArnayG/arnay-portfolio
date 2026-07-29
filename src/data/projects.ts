@@ -38,7 +38,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    title: "Insulin–glucose feedback model for Type 1 diabetes",
+    title: "Automated insulin dosing strategy in people with type 1 diabetes",
     category: "Simulation",
     description:
       "An ODE-based model of the insulin–glucose feedback loop, built during the Wolfram Summer Research Program: the differential-equation system, sensitivity testing, and visualisation pipelines. Earned a Staff's Pick badge on Wolfram Community, has passed 5,000 views, and led to an invitation to present at the Wolfram Technology Conference 2025.",
@@ -55,7 +55,7 @@ export const projects: Project[] = [
     title: "Two-segment hip–knee running model",
     category: "Simulation",
     description:
-      "Extended the classical spring-mass model of running into a two-segment hip–knee system, deriving the equations of motion phase by phase and reconstructing a full apex-to-apex step cycle in a single model. Earned the Wolfram Emerging Leaders distinction, awarded to the top 20% of the cohort.",
+      "Extended the classical spring-mass model of running into a two-segment hip–knee system, deriving the equations of motion phase by phase and reconstructing a full apex-to-apex step cycle in a single model. Earned the Wolfram Emerging Leaders distinction, alongside an invite to become a Teaching Assistant, awarded to the top 20% of the WSRP cohort.",
     stack: ["Wolfram Language"],
     period: "2025",
     links: [
