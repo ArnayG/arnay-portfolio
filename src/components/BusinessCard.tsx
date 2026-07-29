@@ -1,6 +1,7 @@
 import CardStage from "@/components/CardStage";
 import CropMarks from "@/components/CropMarks";
 import Portrait from "@/components/Portrait";
+import SiteAddress from "@/components/SiteAddress";
 import { site } from "@/data/site";
 
 function MetaRow({ label, value }: { label: string; value: string }) {
@@ -29,10 +30,21 @@ export default function BusinessCard() {
         <div className="w-24 shrink-0">
           <Portrait />
         </div>
-        <h1 className="font-grotesk text-2xl font-black tracking-[-0.03em] uppercase italic leading-[0.85]">
-          <span className="block">{site.firstName}</span>
-          <span className="block">{site.lastName}</span>
-        </h1>
+        {/* min-w-0 so a long address shrinks rather than pushing the portrait. */}
+        <div className="min-w-0">
+          <h1 className="font-grotesk text-2xl font-black tracking-[-0.03em] uppercase italic leading-[0.85]">
+            <span className="block">{site.firstName}</span>
+            <span className="block">{site.lastName}</span>
+          </h1>
+
+          {/* Left in lower case: an address is read, not shouted. */}
+          <a
+            href={`mailto:${site.email}`}
+            className="mt-2.5 inline-block font-mono text-[11px] tracking-[0.02em] text-ink-muted transition-colors hover:text-ink"
+          >
+            {site.email}
+          </a>
+        </div>
       </div>
 
       <p className="mt-4">
@@ -65,15 +77,21 @@ export default function BusinessCard() {
         ))}
       </ul>
 
-      <a
-        href={site.resumeUrl}
-        className="shadow-hard-sm mt-4 inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-[11px] tracking-[0.15em] uppercase transition-transform hover:translate-x-px hover:translate-y-px"
-      >
-        Resume
-        <span aria-hidden="true" className="text-mark">
-          [↓]
-        </span>
-      </a>
+      {/* The address of the card itself sits on the trim, the way a printed
+          card carries its own URL. */}
+      <div className="mt-4 flex items-center justify-between gap-3">
+        <a
+          href={site.resumeUrl}
+          className="shadow-hard-sm inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-[11px] tracking-[0.15em] uppercase transition-transform hover:translate-x-px hover:translate-y-px"
+        >
+          Resume
+          <span aria-hidden="true" className="text-mark">
+            [↓]
+          </span>
+        </a>
+
+        <SiteAddress className="shrink-0 font-mono text-[10px] tracking-[0.18em] text-ink-muted uppercase" />
+      </div>
     </CardStage>
   );
 }

@@ -15,8 +15,6 @@ import { getStrokes, paintStroke, strokeColors } from "@/lib/doodle";
 const SCALE = 3;
 /** Dot-grid ground around the card, in card pixels. */
 const PAD = 40;
-/** Strip under the card holding the caption. */
-const CAPTION = 32;
 /** Offset of the letterpress shadow under the card. */
 const SHADOW = 8;
 /** Matches the .dot-grid utility in globals.css. */
@@ -35,11 +33,8 @@ function supportsLetterSpacing(ctx: Ctx) {
 
 type Theme = {
   paper: string;
-  ink: string;
   rule: string;
-  muted: string;
   dot: string;
-  mono: string;
 };
 
 function readTheme(): Theme {
@@ -47,11 +42,8 @@ function readTheme(): Theme {
   const token = (name: string) => cs.getPropertyValue(name).trim();
   return {
     paper: token("--paper") || "#ffffff",
-    ink: token("--ink") || "#0a0a0a",
     rule: token("--rule") || "#d8d6d2",
-    muted: token("--ink-muted") || "#5c5c5c",
     dot: token("--dot") || "rgb(10 10 10 / 0.07)",
-    mono: token("--font-geist-mono") || "monospace",
   };
 }
 
@@ -88,7 +80,7 @@ export async function renderCardPoster(card: HTMLElement): Promise<Blob> {
   const cardW = origin.width;
   const cardH = posterCardHeight(card, origin);
   const groundW = cardW + PAD * 2;
-  const groundH = cardH + PAD * 2 + CAPTION;
+  const groundH = cardH + PAD * 2;
 
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(groundW * SCALE);
@@ -120,8 +112,6 @@ export async function renderCardPoster(card: HTMLElement): Promise<Blob> {
   ctx.restore();
 
   ctx.restore();
-
-  paintCaption(ctx, groundW, PAD + cardH + (PAD + CAPTION) / 2, theme);
   return toBlob(canvas);
 }
 
@@ -135,22 +125,6 @@ function paintDotGrid(ctx: Ctx, w: number, h: number, color: string) {
       ctx.fill();
     }
   }
-  ctx.restore();
-}
-
-function paintCaption(ctx: Ctx, groundW: number, y: number, theme: Theme) {
-  const host = window.location.host.replace(/^www\./, "");
-  const inked = getStrokes().length > 0;
-  const text = `${host || "arnay garhyan"}${inked ? " · doodle edition" : ""}`;
-
-  ctx.save();
-  ctx.font = `500 11px ${theme.mono}`;
-  ctx.fillStyle = theme.muted;
-  ctx.textAlign = "center";
-  ctx.textBaseline = "middle";
-  if (supportsLetterSpacing(ctx)) ctx.letterSpacing = "0.18em";
-  ctx.fillText(text.toUpperCase(), groundW / 2, y);
-  if (supportsLetterSpacing(ctx)) ctx.letterSpacing = "0px";
   ctx.restore();
 }
 
