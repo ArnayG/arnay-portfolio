@@ -1,6 +1,5 @@
 import CardBack from "@/components/CardBack";
 import CardStage from "@/components/CardStage";
-import ContactButton from "@/components/ContactButton";
 import CropMarks from "@/components/CropMarks";
 import Monogram from "@/components/Monogram";
 import Portrait from "@/components/Portrait";
@@ -80,21 +79,17 @@ export default function BusinessCard() {
         ))}
       </ul>
 
-      <div className="mt-4 flex flex-wrap items-center gap-2">
-        <a
-          href={site.resumeUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="shadow-hard-sm inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-[11px] tracking-[0.15em] uppercase transition-transform hover:translate-x-px hover:translate-y-px"
-        >
-          Resume
-          <span aria-hidden="true" className="text-mark">
-            [↓]
-          </span>
-        </a>
-
-        <ContactButton />
-      </div>
+      <a
+        href={site.resumeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="shadow-hard-sm mt-4 inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-[11px] tracking-[0.15em] uppercase transition-transform hover:translate-x-px hover:translate-y-px"
+      >
+        Resume
+        <span aria-hidden="true" className="text-mark">
+          [↓]
+        </span>
+      </a>
 
       {/* Colophon: the card's own address, and the initials as a printer's
           mark. Both sit on the trim, where a printed card carries them. */}
