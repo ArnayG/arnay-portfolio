@@ -10,8 +10,8 @@ const readHost = () => window.location.host.replace(/^www\./, "");
 const noHost = () => "";
 
 /**
- * Where the card came from. `site.website` wins when it's set — use it to
- * show a tidier form than the raw host — and otherwise the live host fills
+ * Where the card came from. `site.website` wins when it's set (use it to
+ * show a tidier form than the raw host), and otherwise the live host fills
  * itself in, so the card is right in development and in production without a
  * domain written down anywhere.
  */

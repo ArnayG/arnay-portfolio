@@ -62,7 +62,7 @@ export function strokeColors(): StrokeColors {
 
 /**
  * Paints a whole stroke. Points are in document space; `dx`/`dy` shift them
- * into whatever space the target canvas uses — the viewport overlay passes the
+ * into whatever space the target canvas uses: the viewport overlay passes the
  * negated scroll offset, the exporter also subtracts the card's own origin.
  * Shared so the exported ink is the same curve the visitor saw on screen.
  */
@@ -157,7 +157,7 @@ function subscribe(listener: () => void) {
   };
 }
 
-/** Live array — read it on demand, keyed off `version`, never hold onto it. */
+/** Live array, read on demand, keyed off `version`, never hold onto it. */
 export function getStrokes(): readonly StoredStroke[] {
   return strokes;
 }

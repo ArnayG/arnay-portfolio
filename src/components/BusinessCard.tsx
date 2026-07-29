@@ -1,5 +1,8 @@
+import CardBack from "@/components/CardBack";
 import CardStage from "@/components/CardStage";
+import ContactButton from "@/components/ContactButton";
 import CropMarks from "@/components/CropMarks";
+import Monogram from "@/components/Monogram";
 import Portrait from "@/components/Portrait";
 import SiteAddress from "@/components/SiteAddress";
 import { site } from "@/data/site";
@@ -16,12 +19,12 @@ function MetaRow({ label, value }: { label: string; value: string }) {
 }
 
 /**
- * The card itself is static markup; CardStage adds the interactive shell —
- * the cursor-driven tilt and the export controls — around it.
+ * The card itself is static markup; CardStage adds the interactive shell around
+ * it: the cursor-driven tilt, the flip and the export controls.
  */
 export default function BusinessCard() {
   return (
-    <CardStage>
+    <CardStage back={<CardBack />}>
       <CropMarks />
 
       {/* Portrait sits beside the name rather than above it: a card-shaped
@@ -77,9 +80,7 @@ export default function BusinessCard() {
         ))}
       </ul>
 
-      {/* The address of the card itself sits on the trim, the way a printed
-          card carries its own URL. */}
-      <div className="mt-4 flex items-center justify-between gap-3">
+      <div className="mt-4 flex flex-wrap items-center gap-2">
         <a
           href={site.resumeUrl}
           className="shadow-hard-sm inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-[11px] tracking-[0.15em] uppercase transition-transform hover:translate-x-px hover:translate-y-px"
@@ -90,7 +91,14 @@ export default function BusinessCard() {
           </span>
         </a>
 
-        <SiteAddress className="shrink-0 font-mono text-[10px] tracking-[0.18em] text-ink-muted uppercase" />
+        <ContactButton />
+      </div>
+
+      {/* Colophon: the card's own address, and the initials as a printer's
+          mark. Both sit on the trim, where a printed card carries them. */}
+      <div className="mt-4 flex items-center justify-between gap-3 border-t border-rule pt-3">
+        <SiteAddress className="font-mono text-[10px] tracking-[0.18em] text-ink-muted uppercase" />
+        <Monogram />
       </div>
     </CardStage>
   );

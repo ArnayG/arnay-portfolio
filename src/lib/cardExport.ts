@@ -8,10 +8,12 @@ import { getStrokes, paintStroke, strokeColors } from "@/lib/doodle";
    is edited, and it picks up the visitor's current theme for free.
 
    Only the constructs the card actually uses are handled: backgrounds, flat
-   borders, the unblurred offset shadow, text runs, inline SVG and images.
+   borders, the unblurred offset shadow, text runs, hollow type, inline SVG
+   and images. Pseudo-elements are invisible to it, since they have no node to
+   walk, so decorative marks on the card belong in the DOM.
    ──────────────────────────────────────────────────────────────────────── */
 
-/** Export resolution multiplier — 3× keeps the hairlines crisp when shared. */
+/** Export resolution multiplier. 3x keeps the hairlines crisp when shared. */
 const SCALE = 3;
 /** Dot-grid ground around the card, in card pixels. */
 const PAD = 40;
@@ -59,18 +61,10 @@ function px(value: string) {
 }
 
 /**
- * Everything below `[data-export-crop]` is site furniture (the export controls
- * themselves), so the poster ends just above it, plus the card's own padding.
+ * Paints one face of the card onto a dot-grid ground. The caller is expected
+ * to have taken every 3D transform off the face first, since a rotated
+ * element's box is its flat projection and would misplace everything.
  */
-function posterCardHeight(card: HTMLElement, origin: DOMRect) {
-  const crop = card.querySelector<HTMLElement>("[data-export-crop]");
-  if (!crop) return origin.height;
-  const cs = getComputedStyle(card);
-  const inset = px(cs.paddingBottom) + px(cs.borderBottomWidth);
-  const height = crop.getBoundingClientRect().top - origin.top + inset;
-  return height > 80 ? height : origin.height;
-}
-
 export async function renderCardPoster(card: HTMLElement): Promise<Blob> {
   // Canvas text needs the webfonts resolved, or it falls back to a system face.
   if (document.fonts?.ready) await document.fonts.ready;
@@ -78,7 +72,7 @@ export async function renderCardPoster(card: HTMLElement): Promise<Blob> {
   const theme = readTheme();
   const origin = card.getBoundingClientRect();
   const cardW = origin.width;
-  const cardH = posterCardHeight(card, origin);
+  const cardH = origin.height;
   const groundW = cardW + PAD * 2;
   const groundH = cardH + PAD * 2;
 
@@ -101,7 +95,7 @@ export async function renderCardPoster(card: HTMLElement): Promise<Blob> {
   ctx.fillStyle = theme.rule;
   ctx.fillRect(SHADOW, SHADOW, cardW, cardH);
 
-  await paintElement(ctx, card, origin, cardH);
+  await paintElement(ctx, card, origin);
 
   // Ink is clipped to the trim: it reads as drawn on the card, not around it.
   ctx.save();
@@ -138,16 +132,7 @@ function paintInk(ctx: Ctx, origin: DOMRect) {
   for (const stroke of strokes) paintStroke(ctx, stroke, dx, dy, colors);
 }
 
-/**
- * `overrideH` lets the root card be painted at the cropped height, so its
- * bottom border lands on the trim rather than below the poster.
- */
-async function paintElement(
-  ctx: Ctx,
-  el: Element,
-  origin: DOMRect,
-  overrideH?: number,
-): Promise<void> {
+async function paintElement(ctx: Ctx, el: Element, origin: DOMRect): Promise<void> {
   if (el instanceof HTMLElement && el.dataset.exportHide !== undefined) return;
 
   const cs = getComputedStyle(el);
@@ -160,7 +145,7 @@ async function paintElement(
     x: rect.left - origin.left,
     y: rect.top - origin.top,
     w: rect.width,
-    h: overrideH ?? rect.height,
+    h: rect.height,
   };
   if (!box.w || !box.h) return;
 
@@ -205,7 +190,7 @@ function paintShadow(ctx: Ctx, shadow: string, box: Box) {
   if (Number(blur) > 0 || !isPainted(color)) return;
   const grow = Number(spread ?? 0);
 
-  // An outer shadow is never painted under its own border box — without the
+  // An outer shadow is never painted under its own border box; without the
   // hole it would show through anything with a transparent background.
   ctx.save();
   const region = new Path2D();
@@ -313,23 +298,37 @@ function paintText(ctx: Ctx, node: Text, cs: CSSStyleDeclaration, origin: DOMRec
   const spaced = Boolean(spacing) && spacing !== "normal" && px(spacing) !== 0;
   const canSpace = supportsLetterSpacing(ctx);
 
+  // Hollow display type (the monogram, the outlined headings) is a text stroke
+  // over a transparent fill, so a painter that only fills would drop it.
+  const strokeWidth = px(cs.webkitTextStrokeWidth);
+  const outlined = strokeWidth > 0 && isPainted(cs.webkitTextStrokeColor);
+  const filled = isPainted(cs.color);
+
   ctx.save();
   ctx.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`;
   ctx.fillStyle = cs.color;
+  ctx.strokeStyle = cs.webkitTextStrokeColor;
+  ctx.lineWidth = strokeWidth;
+  ctx.lineJoin = "round";
   ctx.textAlign = "left";
   // The line box is centred on the em box, so "middle" lands on the baseline
   // the browser used without having to dig out font metrics.
   ctx.textBaseline = "middle";
   if (canSpace) ctx.letterSpacing = spaced ? spacing : "0px";
 
+  const put = (text: string, x: number, y: number) => {
+    if (filled) ctx.fillText(text, x, y);
+    if (outlined) ctx.strokeText(text, x, y);
+  };
+
   for (const line of lines) {
     const y = (line.top + line.bottom) / 2 - origin.top;
     if (spaced && !canSpace) {
       // Fall back to placing each glyph where the browser put it.
-      for (const part of line.parts) ctx.fillText(part.glyph, part.x - origin.left, y);
+      for (const part of line.parts) put(part.glyph, part.x - origin.left, y);
     } else {
       const text = line.parts.map((part) => part.glyph).join("");
-      ctx.fillText(text, line.parts[0].x - origin.left, y);
+      put(text, line.parts[0].x - origin.left, y);
     }
   }
 
@@ -346,8 +345,13 @@ async function paintSvg(ctx: Ctx, svg: SVGSVGElement, box: Box, cs: CSSStyleDecl
   try {
     const clone = svg.cloneNode(true) as SVGSVGElement;
     clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-    clone.setAttribute("width", String(box.w));
-    clone.setAttribute("height", String(box.h));
+
+    // With a viewBox the artwork scales with the frame, so it can be
+    // rasterised at output resolution instead of being blown up afterwards.
+    // Without one, coordinates are absolute and resizing would move them.
+    const scale = svg.hasAttribute("viewBox") ? SCALE : 1;
+    clone.setAttribute("width", String(box.w * scale));
+    clone.setAttribute("height", String(box.h * scale));
 
     const root = getComputedStyle(document.documentElement);
     const markup = new XMLSerializer()
@@ -402,8 +406,8 @@ function toBlob(canvas: HTMLCanvasElement): Promise<Blob> {
 export type ShareResult = "shared" | "saved" | "cancelled";
 
 /**
- * Prefers the native share sheet — that's the route to Messages, Instagram or
- * WhatsApp — and falls back to a download where files can't be shared.
+ * Prefers the native share sheet, which is the route to Messages, Instagram or
+ * WhatsApp, and falls back to a download where files can't be shared.
  */
 export async function shareOrDownload(
   blob: Blob,
