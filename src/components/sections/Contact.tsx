@@ -1,4 +1,5 @@
 import DisplayHeading from "@/components/DisplayHeading";
+import EmailLink from "@/components/EmailLink";
 import { site } from "@/data/site";
 
 export default function Contact() {
@@ -12,12 +13,7 @@ export default function Contact() {
         I built, my inbox is open.
       </p>
 
-      <a
-        href={`mailto:${site.email}`}
-        className="shadow-hard mt-8 inline-flex items-center border border-ink bg-paper px-5 py-3 font-mono text-sm tracking-[0.1em] transition-transform hover:translate-x-0.5 hover:translate-y-0.5"
-      >
-        {site.email}
-      </a>
+      <EmailLink className="shadow-hard mt-8 inline-flex items-center border border-ink bg-paper px-5 py-3 font-mono text-sm tracking-[0.1em] transition-transform hover:translate-x-0.5 hover:translate-y-0.5" />
 
       <ul className="mt-8 flex flex-wrap gap-5">
         {site.socials.map((social) => (

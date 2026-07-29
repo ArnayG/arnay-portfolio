@@ -16,7 +16,12 @@ export const site = {
   headline: { solid: "Arnay", outline: "Garhyan" },
   summary:
     "Stanford CS student passionate about technology, AI, research, and making the world a better place.",
-  email: "arnay@stanford.edu",
+  /**
+   * The Stanford address, ROT13'd and split at the "@" so it is never a literal
+   * string in anything the server sends. Render it through EmailLink,
+   * which puts it back together in the browser; see src/lib/email.ts.
+   */
+  emailParts: { user: "neanl", host: "fgnasbeq.rqh" },
   location: "Indianapolis, IN",
   availability: "Open to summer 2027 internships",
   resumeUrl: "/resume.pdf",

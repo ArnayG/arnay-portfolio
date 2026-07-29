@@ -1,6 +1,7 @@
 import CardBack from "@/components/CardBack";
 import CardStage from "@/components/CardStage";
 import CropMarks from "@/components/CropMarks";
+import EmailLink from "@/components/EmailLink";
 import Monogram from "@/components/Monogram";
 import Portrait from "@/components/Portrait";
 import SiteAddress from "@/components/SiteAddress";
@@ -40,12 +41,7 @@ export default function BusinessCard() {
           </h1>
 
           {/* Left in lower case: an address is read, not shouted. */}
-          <a
-            href={`mailto:${site.email}`}
-            className="mt-2.5 inline-block font-mono text-[11px] tracking-[0.02em] text-ink-muted transition-colors hover:text-ink"
-          >
-            {site.email}
-          </a>
+          <EmailLink className="mt-2.5 inline-block font-mono text-[11px] tracking-[0.02em] text-ink-muted transition-colors hover:text-ink" />
         </div>
       </div>
 
