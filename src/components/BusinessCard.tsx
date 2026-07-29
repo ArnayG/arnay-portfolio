@@ -1,5 +1,10 @@
+import CardBack from "@/components/CardBack";
+import CardStage from "@/components/CardStage";
+import ContactButton from "@/components/ContactButton";
 import CropMarks from "@/components/CropMarks";
+import Monogram from "@/components/Monogram";
 import Portrait from "@/components/Portrait";
+import SiteAddress from "@/components/SiteAddress";
 import { site } from "@/data/site";
 
 function MetaRow({ label, value }: { label: string; value: string }) {
@@ -13,9 +18,13 @@ function MetaRow({ label, value }: { label: string; value: string }) {
   );
 }
 
+/**
+ * The card itself is static markup; CardStage adds the interactive shell around
+ * it: the cursor-driven tilt, the flip and the export controls.
+ */
 export default function BusinessCard() {
   return (
-    <div className="relative border border-ink bg-paper p-4">
+    <CardStage back={<CardBack />}>
       <CropMarks />
 
       {/* Portrait sits beside the name rather than above it: a card-shaped
@@ -24,10 +33,21 @@ export default function BusinessCard() {
         <div className="w-24 shrink-0">
           <Portrait />
         </div>
-        <h1 className="font-grotesk text-2xl font-black tracking-[-0.03em] uppercase italic leading-[0.85]">
-          <span className="block">{site.firstName}</span>
-          <span className="block">{site.lastName}</span>
-        </h1>
+        {/* min-w-0 so a long address shrinks rather than pushing the portrait. */}
+        <div className="min-w-0">
+          <h1 className="font-grotesk text-2xl font-black tracking-[-0.03em] uppercase italic leading-[0.85]">
+            <span className="block">{site.firstName}</span>
+            <span className="block">{site.lastName}</span>
+          </h1>
+
+          {/* Left in lower case: an address is read, not shouted. */}
+          <a
+            href={`mailto:${site.email}`}
+            className="mt-2.5 inline-block font-mono text-[11px] tracking-[0.02em] text-ink-muted transition-colors hover:text-ink"
+          >
+            {site.email}
+          </a>
+        </div>
       </div>
 
       <p className="mt-4">
@@ -60,17 +80,28 @@ export default function BusinessCard() {
         ))}
       </ul>
 
-      <a
-        href={site.resumeUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="shadow-hard-sm mt-4 inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-[11px] tracking-[0.15em] uppercase transition-transform hover:translate-x-px hover:translate-y-px"
-      >
-        Resume
-        <span aria-hidden="true" className="text-mark">
-          [↓]
-        </span>
-      </a>
-    </div>
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        <a
+          href={site.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="shadow-hard-sm inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-[11px] tracking-[0.15em] uppercase transition-transform hover:translate-x-px hover:translate-y-px"
+        >
+          Resume
+          <span aria-hidden="true" className="text-mark">
+            [↓]
+          </span>
+        </a>
+
+        <ContactButton />
+      </div>
+
+      {/* Colophon: the card's own address, and the initials as a printer's
+          mark. Both sit on the trim, where a printed card carries them. */}
+      <div className="mt-4 flex items-center justify-between gap-3 border-t border-rule pt-3">
+        <SiteAddress className="font-mono text-[10px] tracking-[0.18em] text-ink-muted uppercase" />
+        <Monogram />
+      </div>
+    </CardStage>
   );
 }

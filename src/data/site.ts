@@ -30,6 +30,12 @@ export const site = {
     width: 320,
     height: 303,
   } as { src: string; width: number; height: number } | null,
+  /**
+   * The address printed on the card. Leave it null to show whatever host the
+   * site is being served from; set it to override that with a tidier form
+   * (say "arnaygarhyan.com" for a deploy that answers on a longer name).
+   */
+  website: null as string | null,
   socials: [
     { label: "GitHub", href: "https://github.com/ArnayG" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/arnay-g/" },

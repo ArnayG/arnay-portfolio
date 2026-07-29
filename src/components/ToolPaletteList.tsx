@@ -1,4 +1,4 @@
-import type { Tool } from "@/components/DrawingLayer";
+import type { Tool } from "@/lib/doodle";
 
 type ToolPaletteListProps = {
   tool: Tool;
