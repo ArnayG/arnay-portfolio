@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import ToolPalette from "@/components/ToolPalette";
+import ToolPaletteList from "@/components/ToolPaletteList";
 
 export type Tool = "cursor" | "pencil" | "pen";
 type DrawTool = Exclude<Tool, "cursor">;
@@ -64,7 +65,6 @@ export default function DrawingLayer() {
   });
 
   const [tool, setTool] = useState<Tool>("cursor");
-  const [enabled, setEnabled] = useState(false);
   const [hasInk, setHasInk] = useState(false);
 
   /** Resolve stroke colours from the theme tokens, so drawings follow it. */
@@ -156,18 +156,8 @@ export default function DrawingLayer() {
     ctx.stroke();
   }, []);
 
-  // Mouse-driven feature: on touch, a full-page canvas would swallow scrolling.
-  useEffect(() => {
-    const fine = window.matchMedia("(pointer: fine)");
-    const sync = () => setEnabled(fine.matches);
-    sync();
-    fine.addEventListener("change", sync);
-    return () => fine.removeEventListener("change", sync);
-  }, []);
-
   // Size to the viewport, and follow theme changes and scrolling.
   useEffect(() => {
-    if (!enabled) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
 
@@ -201,7 +191,7 @@ export default function DrawingLayer() {
       observer.disconnect();
       if (frame.current) cancelAnimationFrame(frame.current);
     };
-  }, [enabled, readColors, redraw, scheduleRedraw]);
+  }, [readColors, redraw, scheduleRedraw]);
 
   const toDoc = (e: React.PointerEvent): Point => ({
     x: e.clientX + window.scrollX,
@@ -258,12 +248,14 @@ export default function DrawingLayer() {
     redraw();
   }
 
-  if (!enabled) return null;
-
   const drawing = tool !== "cursor";
 
   return (
     <>
+      {/* touch-none only while drawing: otherwise the browser would claim the
+          gesture for scrolling and no stroke would ever start. In cursor/touch
+          mode the canvas drops pointer events entirely, so scrolling and links
+          behave normally. */}
       <canvas
         ref={canvasRef}
         aria-hidden="true"
@@ -272,11 +264,19 @@ export default function DrawingLayer() {
         onPointerUp={endStroke}
         onPointerCancel={endStroke}
         className={`fixed inset-0 z-30 ${
-          drawing ? "cursor-crosshair" : "pointer-events-none"
+          drawing ? "cursor-crosshair touch-none" : "pointer-events-none"
         }`}
       />
 
+      {/* Both render; pointer-fine / pointer-coarse pick one, which keeps this
+          out of JS and avoids a hydration mismatch. */}
       <ToolPalette
+        tool={tool}
+        onSelect={setTool}
+        onClear={clearAll}
+        canClear={hasInk}
+      />
+      <ToolPaletteList
         tool={tool}
         onSelect={setTool}
         onClear={clearAll}

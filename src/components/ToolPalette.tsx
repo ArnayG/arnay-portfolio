@@ -80,7 +80,7 @@ export default function ToolPalette({
   canClear,
 }: ToolPaletteProps) {
   return (
-    <div className="fixed right-8 bottom-8 z-50 h-40 w-52">
+    <div className="fixed right-8 bottom-8 z-50 hidden h-40 w-52 pointer-fine:block">
       {/* Outline only, so it reads as drawn rather than rendered. evenodd
           punches a real thumb hole. */}
       <svg
