@@ -40,5 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# local agent settings
+# local agent settings and scratch worktrees
 .claude/settings.local.json
+.claude/worktrees/

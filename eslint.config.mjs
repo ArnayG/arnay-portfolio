@@ -12,6 +12,10 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // The defaults are root-relative, so build output inside a nested
+    // worktree under .claude/ would otherwise get linted as source.
+    "**/.next/**",
+    ".claude/**",
   ]),
 ]);
 
