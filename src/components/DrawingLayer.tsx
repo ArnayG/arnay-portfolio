@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import ToolPalette from "@/components/ToolPalette";
 
-type Tool = "cursor" | "pencil" | "pen";
+export type Tool = "cursor" | "pencil" | "pen";
 type DrawTool = Exclude<Tool, "cursor">;
 type Point = { x: number; y: number };
 type Stroke = { tool: DrawTool; points: Point[] };
@@ -275,38 +276,12 @@ export default function DrawingLayer() {
         }`}
       />
 
-      <div className="shadow-hard-sm fixed right-6 bottom-6 z-50 flex flex-col rounded-md border border-ink bg-paper">
-        {(
-          [
-            ["cursor", "Cursor"],
-            ["pencil", "Pencil"],
-            ["pen", "Pen"],
-          ] as const
-        ).map(([value, label]) => (
-          <button
-            key={value}
-            type="button"
-            onClick={() => setTool(value)}
-            aria-pressed={tool === value}
-            className={`px-3 py-2 text-left font-mono text-[10px] tracking-[0.18em] uppercase transition-colors ${
-              tool === value
-                ? "bg-ink text-paper"
-                : "text-ink-muted hover:text-ink"
-            }`}
-          >
-            {label}
-          </button>
-        ))}
-
-        <button
-          type="button"
-          onClick={clearAll}
-          disabled={!hasInk}
-          className="border-t border-rule px-3 py-2 text-left font-mono text-[10px] tracking-[0.18em] text-ink-muted uppercase transition-colors hover:text-ink disabled:opacity-35 disabled:hover:text-ink-muted"
-        >
-          Erase all
-        </button>
-      </div>
+      <ToolPalette
+        tool={tool}
+        onSelect={setTool}
+        onClear={clearAll}
+        canClear={hasInk}
+      />
     </>
   );
 }

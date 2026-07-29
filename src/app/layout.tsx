@@ -3,6 +3,7 @@ import { Archivo, Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import DrawingLayer from "@/components/DrawingLayer";
+import CursorGlow from "@/components/CursorGlow";
 import { site } from "@/data/site";
 import "./globals.css";
 
@@ -60,6 +61,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <CursorGlow />
         <DrawingLayer />
       </body>
     </html>
