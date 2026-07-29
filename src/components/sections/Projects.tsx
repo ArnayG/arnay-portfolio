@@ -1,3 +1,4 @@
+import Logo from "@/components/Logo";
 import Section from "@/components/Section";
 import { projects } from "@/data/projects";
 
@@ -10,6 +11,10 @@ export default function Projects() {
             key={index}
             className="flex flex-col bg-paper p-5 transition-colors hover:bg-paper/60"
           >
+            {project.logo ? (
+              <Logo logo={project.logo} className="mb-4 self-start" />
+            ) : null}
+
             <p className="font-mono text-[10px] tracking-[0.2em] text-ink-muted uppercase">
               {project.category}
               {project.period ? ` · ${project.period}` : ""}

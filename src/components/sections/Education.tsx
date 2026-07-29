@@ -1,3 +1,4 @@
+import Logo from "@/components/Logo";
 import Section from "@/components/Section";
 import { education, type School } from "@/data/education";
 
@@ -28,7 +29,10 @@ export default function Education() {
                 {levelLabels[school.level]} · {school.period}
               </p>
 
-              <h3 className="mt-1.5 text-lg font-medium">{school.name}</h3>
+              <div className="mt-1.5 flex items-center gap-4">
+                <h3 className="text-lg font-medium">{school.name}</h3>
+                {school.logo ? <Logo logo={school.logo} /> : null}
+              </div>
 
               {school.major ? (
                 <p className="mt-1 text-sm text-ink-muted">{school.major}</p>

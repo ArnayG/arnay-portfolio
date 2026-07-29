@@ -3,11 +3,14 @@ export type TestScore = {
   score: string;
 };
 
+import { logos, type LogoAsset } from "@/data/logos";
+
 export type School = {
   level: "middle" | "high" | "college";
   name: string;
   period: string;
   location?: string;
+  logo?: LogoAsset;
   /** College only. */
   major?: string;
   gpa?: string;
@@ -22,12 +25,14 @@ export const education: School[] = [
     name: "Sycamore School",
     period: "Pre-K — 2022",
     location: "Indianapolis, IN",
+    logo: logos.sycamore,
   },
   {
     level: "high",
     name: "Park Tudor School",
     period: "2022 — 2026",
     location: "Indianapolis, IN",
+    logo: logos.parkTudor,
     gpa: "4.0 / 4.0 unweighted",
     testScores: [
       { label: "SAT", score: "1600" },
@@ -47,5 +52,6 @@ export const education: School[] = [
     period: "2026 — 2030",
     location: "Stanford, CA",
     major: "Computer Science",
+    logo: logos.stanford,
   },
 ];

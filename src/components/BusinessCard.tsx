@@ -1,27 +1,6 @@
+import CropMarks from "@/components/CropMarks";
 import Portrait from "@/components/Portrait";
 import { site } from "@/data/site";
-
-/** Crop marks, set outside the trim like a printed card. */
-function CropMarks() {
-  const corners = [
-    "-top-2 -left-2 border-t border-l",
-    "-top-2 -right-2 border-t border-r",
-    "-bottom-2 -left-2 border-b border-l",
-    "-bottom-2 -right-2 border-b border-r",
-  ];
-
-  return (
-    <>
-      {corners.map((position) => (
-        <span
-          key={position}
-          aria-hidden="true"
-          className={`absolute h-2.5 w-2.5 border-ink ${position}`}
-        />
-      ))}
-    </>
-  );
-}
 
 function MetaRow({ label, value }: { label: string; value: string }) {
   return (
