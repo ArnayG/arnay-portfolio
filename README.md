@@ -15,7 +15,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Editing content
 
-Site content lives in `src/data/` — you shouldn't need to touch component code
+Site content lives in `src/data/`, so you shouldn't need to touch component code
 to update it:
 
 | File                     | What it holds                               |

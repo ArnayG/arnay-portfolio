@@ -22,7 +22,7 @@ export default function Research() {
       </p>
 
       <ol className="space-y-8">
-        {/* Static ordered list — index keys are stable here, and titles are
+        {/* Static ordered list, so index keys are stable here, and titles are
             not guaranteed unique. */}
         {research.map((item, index) => (
           <li key={index} className="border-l-2 border-ink pl-5">

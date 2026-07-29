@@ -105,7 +105,7 @@
     }
   }
 
-  /* Unblurred offset shadow — the printed/letterpress edge. */
+  /* Unblurred offset shadow: the printed/letterpress edge. */
   .shadow-hard {
     box-shadow: 4px 4px 0 0 var(--ink);
   }

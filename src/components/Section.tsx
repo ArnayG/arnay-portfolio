@@ -5,7 +5,7 @@ type SectionProps = {
   title: string;
   /** Optional hollow second line of the heading. */
   outline?: string;
-  /** Small factual line above the heading — counts, dates, scope. */
+  /** Small factual line above the heading: counts, dates, scope. */
   kicker?: string;
   children: React.ReactNode;
 };

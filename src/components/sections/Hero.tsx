@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section id="top" className="py-12 sm:py-16">
       {/* The card carries the name and the page's <h1>, so the hero states
-          the role instead — repeating the name reads as a mistake. */}
+          the role instead, since repeating the name reads as a mistake. */}
       <DisplayHeading
         solid={site.headline.solid}
         outline={site.headline.outline}

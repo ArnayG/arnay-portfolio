@@ -67,7 +67,7 @@ export default function Education() {
                   {school.activities.map((activity, activityIndex) => (
                     <li
                       key={activityIndex}
-                      className="before:mr-2 before:content-['—']"
+                      className="before:mr-2 before:content-['·']"
                     >
                       {activity}
                     </li>

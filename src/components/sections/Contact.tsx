@@ -8,8 +8,8 @@ export default function Contact() {
 
       <p className="mt-8 leading-relaxed text-ink-muted">
         I&apos;m looking for software engineering internships. If you think
-        there&apos;s a fit — or you just want to talk about something I built —
-        my inbox is open.
+        there&apos;s a fit, or you just want to talk about something I built, my
+        inbox is open.
       </p>
 
       <a

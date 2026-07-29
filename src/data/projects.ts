@@ -22,9 +22,9 @@ export const projects: Project[] = [
     category: "Web",
     logo: logos.trackInsights,
     description:
-      "A public data app for Indiana high-school track and field, built with two classmates after an athlete asked how their 4×800 time would have placed in other sectionals. I led the frontend — athlete dashboards, achievement badges, rankings, and query tools over a database of 23,000+ athletes and 62,500+ individual results.",
+      "A public data app for Indiana high-school track and field, built with two classmates after an athlete asked how their 4×800 time would have placed in other sectionals. I led the frontend: athlete dashboards, achievement badges, rankings, and query tools over a database of 23,000+ athletes and 62,500+ individual results.",
     stack: ["HTML", "Tailwind CSS", "daisyUI", "JavaScript"],
-    period: "2025 — 2026",
+    period: "2025–2026",
     links: [{ label: "Live", href: "https://www.trackinsights.org" }],
   },
   {
@@ -32,7 +32,7 @@ export const projects: Project[] = [
     category: "App",
     logo: logos.readySetGo,
     description:
-      "Track and field runs on numbers, but a new spectator has no way to tell whether a given mark is remarkable — world rankings come from opaque scoring tables. Built with a classmate to translate marks, rankings, and scores into something readable. Won Indiana's 7th District in the 2024 Congressional App Challenge, selected from 3,881 apps submitted nationally.",
+      "Track and field runs on numbers, but a new spectator has no way to tell whether a given mark is remarkable, since world rankings come from opaque scoring tables. Built with a classmate to translate marks, rankings, and scores into something readable. Won Indiana's 7th District in the 2024 Congressional App Challenge, selected from 3,881 apps submitted nationally.",
     stack: ["HTML", "CSS", "JavaScript"],
     period: "2024",
     links: [

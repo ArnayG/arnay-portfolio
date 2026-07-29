@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <>
       <Container className="pt-10 pb-24">
-        {/* Sticky lives on the aside via self-start — items-start on the grid
+        {/* Sticky lives on the aside via self-start, because items-start on the grid
             would also un-stretch the content column. min-w-0 keeps a long
             unbroken string from blowing out the 1fr track. */}
         <div className="grid gap-12 lg:grid-cols-[340px_1fr] lg:gap-16">
