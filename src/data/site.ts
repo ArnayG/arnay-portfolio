@@ -3,26 +3,21 @@ export type SocialLink = {
   href: string;
 };
 
-/**
- * Single source of truth for the personal details shown across the site.
- * TODO: replace every placeholder below with your real information.
- */
+/** Single source of truth for the personal details shown across the site. */
 export const site = {
   /** Split so the display type can set the surname as an outline. */
   firstName: "Arnay",
-  lastName: "TODO",
-  role: "Software Engineer",
+  lastName: "Garhyan",
+  role: "Student @ Stanford",
   /** Small line under the name on the card. */
-  cardline: "Incoming CS student",
-  /**
-   * The hero display type. Deliberately the role, not the name — the card
-   * already carries the name, and repeating it reads as a mistake.
-   */
-  headline: { solid: "Software", outline: "Engineer" },
+  cardline:
+    "Pharmacokinetic modeling, simulation tooling, and robotics. R · Wolfram · Python",
+  /** The hero display type: solid first line, outlined second. */
+  headline: { solid: "Arnay", outline: "Garhyan" },
   summary:
-    "TODO: two or three sentences on what you build, what you're interested in, and what you're looking for. Keep it specific — recruiters skim this first.",
-  email: "you@example.com",
-  location: "TODO: City, State",
+    "Stanford CS student passionate about technology, AI, research, and making the world a better place.",
+  email: "arnay@stanford.edu",
+  location: "Indianapolis, IN",
   availability: "Open to summer 2027 internships",
   resumeUrl: "/resume.pdf",
   /**
@@ -33,15 +28,15 @@ export const site = {
   photo: null as string | null,
   socials: [
     { label: "GitHub", href: "https://github.com/ArnayG" },
-    { label: "LinkedIn", href: "https://linkedin.com/in/TODO" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/arnay-g/" },
   ] satisfies SocialLink[],
   skills: [
-    "TypeScript",
     "Python",
+    "Wolfram Language",
+    "R",
     "Java",
-    "React",
-    "Next.js",
-    "Node.js",
+    "HTML/CSS/JS",
+    "C++",
     "Git",
   ],
 };

@@ -13,9 +13,11 @@ export default function Hobbies() {
             <dt className="font-mono text-[11px] tracking-[0.16em] uppercase">
               {hobby.name}
             </dt>
-            <dd className="text-sm leading-relaxed text-ink-muted">
-              {hobby.detail}
-            </dd>
+            {hobby.detail ? (
+              <dd className="text-sm leading-relaxed text-ink-muted">
+                {hobby.detail}
+              </dd>
+            ) : null}
           </div>
         ))}
       </dl>

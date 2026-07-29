@@ -32,29 +32,21 @@ export default function Projects() {
               ))}
             </ul>
 
-            {project.repo || project.demo ? (
-              <div className="mt-4 flex gap-4">
-                {project.repo ? (
-                  <a
-                    href={project.repo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-mono text-[11px] tracking-[0.14em] uppercase underline decoration-rule underline-offset-4 transition-colors hover:decoration-ink"
-                  >
-                    Code
-                  </a>
-                ) : null}
-                {project.demo ? (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-mono text-[11px] tracking-[0.14em] uppercase underline decoration-rule underline-offset-4 transition-colors hover:decoration-ink"
-                  >
-                    Live
-                  </a>
-                ) : null}
-              </div>
+            {project.links?.length ? (
+              <ul className="mt-4 flex flex-wrap gap-4">
+                {project.links.map((link) => (
+                  <li key={link.href}>
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-[11px] tracking-[0.14em] uppercase underline decoration-rule underline-offset-4 transition-colors hover:decoration-ink"
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             ) : null}
           </li>
         ))}

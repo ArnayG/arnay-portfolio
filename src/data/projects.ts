@@ -1,3 +1,8 @@
+export type ProjectLink = {
+  label: string;
+  href: string;
+};
+
 export type Project = {
   title: string;
   /** Short grouping label, e.g. "Robotics", "Web". */
@@ -5,35 +10,67 @@ export type Project = {
   description: string;
   stack: string[];
   period?: string;
-  repo?: string;
-  demo?: string;
+  links?: ProjectLink[];
 };
 
-/** TODO: replace these placeholders with your real projects. */
 export const projects: Project[] = [
   {
-    title: "TODO: Robotics project",
+    title: "Track Insights",
+    category: "Web",
+    description:
+      "A public data app for Indiana high-school track and field, built with two classmates after an athlete asked how their 4×800 time would have placed in other sectionals. I led the frontend — athlete dashboards, achievement badges, rankings, and query tools over a database of 23,000+ athletes and 62,500+ individual results.",
+    stack: ["HTML", "Tailwind CSS", "daisyUI", "JavaScript"],
+    period: "2025 — 2026",
+    links: [{ label: "Live", href: "https://www.trackinsights.org" }],
+  },
+  {
+    title: "VEX Robotics Competition",
     category: "Robotics",
     description:
-      "TODO: what it did, what you were responsible for, and the hardest problem you solved.",
-    stack: ["TODO", "TODO"],
-    period: "TODO",
+      "Lead programmer and notebooker across four seasons. Built autonomous routines using PID loops, motion profiling, slew control, and sensor fusion (IMU and shaft encoders), and co-designed mechanisms through iterative CAD and FEA. VEX World Championship Division Champions and Indiana State Champions, with 44 judged awards and a national ranking of 14th out of 6,244 teams.",
+    stack: ["C++", "VEX V5"],
+    period: "2022 — 2026",
   },
   {
-    title: "TODO: First website",
-    category: "Web",
+    title: "Ready, Set, GO!",
+    category: "App",
     description:
-      "TODO: who it was for and what it needed to do. Lead with impact where you have it.",
-    stack: ["TODO", "TODO"],
-    period: "TODO",
-    repo: "https://github.com/ArnayG",
+      "Track and field runs on numbers, but a new spectator has no way to tell whether a given mark is remarkable — world rankings come from opaque scoring tables. Built with a classmate to translate marks, rankings, and scores into something readable. Won Indiana's 7th District in the 2024 Congressional App Challenge, selected from 3,881 apps submitted nationally.",
+    stack: ["HTML", "CSS", "JavaScript"],
+    period: "2024",
+    links: [
+      {
+        label: "Announcement",
+        href: "https://www.congressionalappchallenge.us/24-in07/",
+      },
+    ],
   },
   {
-    title: "TODO: Second website",
-    category: "Web",
-    description: "TODO: another site. Drop this entry if two is enough.",
-    stack: ["TODO"],
-    period: "TODO",
-    repo: "https://github.com/ArnayG",
+    title: "Insulin–glucose feedback model for Type 1 diabetes",
+    category: "Simulation",
+    description:
+      "An ODE-based model of the insulin–glucose feedback loop, built during the Wolfram Summer Research Program: the differential-equation system, sensitivity testing, and visualisation pipelines. Earned a Staff's Pick badge on Wolfram Community, has passed 5,000 views, and led to an invitation to present at the Wolfram Technology Conference 2025.",
+    stack: ["Wolfram Language"],
+    period: "2025",
+    links: [
+      {
+        label: "Write-up",
+        href: "https://community.wolfram.com/groups/-/m/t/3499212",
+      },
+    ],
+  },
+  {
+    title: "Two-segment hip–knee running model",
+    category: "Simulation",
+    description:
+      "Extended the classical spring-mass model of running into a two-segment hip–knee system, deriving the equations of motion phase by phase and reconstructing a full apex-to-apex step cycle in a single model. Earned the Wolfram Emerging Leaders distinction, awarded to the top 20% of the cohort.",
+    stack: ["Wolfram Language"],
+    period: "2025",
+    links: [
+      {
+        label: "Write-up",
+        href: "https://community.wolfram.com/groups/-/m/t/3641221",
+      },
+    ],
   },
 ];

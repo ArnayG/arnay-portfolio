@@ -15,6 +15,12 @@ export default function Research() {
       title="Research"
       kicker={`${plural(papers, "paper")} · ${plural(posters, "poster")}`}
     >
+      <p className="mb-10 max-w-prose leading-relaxed text-ink-muted">
+        Presented at both conferences as the only high-school author among
+        industry researchers, working with Dr. Derek Leishman, VP of
+        Translational Toxicology at Eli Lilly.
+      </p>
+
       <ol className="space-y-8">
         {/* Static ordered list — index keys are stable here, and titles are
             not guaranteed unique. */}

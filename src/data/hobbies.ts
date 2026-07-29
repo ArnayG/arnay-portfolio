@@ -1,20 +1,19 @@
 export type Hobby = {
   name: string;
-  detail: string;
+  /** Optional — a hobby can stand on its name alone. */
+  detail?: string;
 };
 
-/** TODO: replace these placeholders with your real hobbies. */
 export const hobbies: Hobby[] = [
   {
-    name: "TODO: Instrument",
-    detail: "TODO: how long, what you play, anything you've performed in.",
+    name: "Saxophone & piano",
+    detail: "Alto and tenor saxophone, and piano, since fourth grade.",
   },
   {
-    name: "TODO: Keyboards",
-    detail: "TODO: builds, switches, what you're running now.",
+    name: "Golf",
+    detail: "Three seasons on the school's JV team.",
   },
   {
-    name: "TODO: Third hobby",
-    detail: "TODO: add or remove entries freely.",
+    name: "Mechanical keyboards",
   },
 ];
