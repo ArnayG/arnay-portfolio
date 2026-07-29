@@ -22,8 +22,11 @@
   --rule: #d8d6d2;
   --mark: #e2481f;
   --dot: rgb(10 10 10 / 0.07);
-  /* Halo that tracks the cursor. Kept faint — it tints, it doesn't light. */
-  --glow: rgb(226 72 31 / 0.045);
+  /* Halo that tracks the cursor. Kept faint — it tints, it doesn't light.
+     Light mode uses a deeper burnt tone than dark mode's bright coral: a pale
+     pigment laid over white barely shifts its luminance, while the same colour
+     over near-black is a large jump. Opposite direction, same faint result. */
+  --glow: rgb(122 34 12 / 0.11);
 }
 
 .dark,
