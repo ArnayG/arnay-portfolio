@@ -24,7 +24,7 @@ export const projects: Project[] = [
     links: [{ label: "Live", href: "https://www.trackinsights.org" }],
   },
   {
-    title: "VEX Robotics Competition",
+    title: "VEX Robotics — 6842K Killer Instinct",
     category: "Robotics",
     description:
       "Lead programmer and notebooker across four seasons. Built autonomous routines using PID loops, motion profiling, slew control, and sensor fusion (IMU and shaft encoders), and co-designed mechanisms through iterative CAD and FEA. 2026 VEX Robotics World Championship Division Champions and Indiana State Champions, with 44 judged awards and a global ranking inside the top ten of 6,000+ teams.",
