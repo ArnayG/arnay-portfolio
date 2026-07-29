@@ -23,7 +23,7 @@
   --mark: #e2481f;
   --dot: rgb(10 10 10 / 0.07);
   /* Halo that tracks the cursor. Kept faint — it tints, it doesn't light. */
-  --glow: rgb(226 72 31 / 0.09);
+  --glow: rgb(226 72 31 / 0.045);
 }
 
 .dark,
@@ -35,7 +35,7 @@
   --rule: #3a3a3a;
   --mark: #ff6b52;
   --dot: rgb(247 245 241 / 0.08);
-  --glow: rgb(255 107 82 / 0.16);
+  --glow: rgb(255 107 82 / 0.075);
 }
 
 :root {
