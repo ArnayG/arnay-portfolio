@@ -68,13 +68,8 @@ export default function CardStage({ children, back }: CardStageProps) {
   const [busy, setBusy] = useState<null | "export" | "copy">(null);
   const [status, setStatus] = useState<Status>(null);
   /** Probed after mount, so the server and the first client render agree. */
-  const [env, setEnv] = useState({
-    tiltable: false,
-    canDraw: false,
-    copyable: false,
-    motion: false,
-  });
-  const { tiltable, canDraw, copyable, motion } = env;
+  const [env, setEnv] = useState({ tiltable: false, copyable: false, motion: false });
+  const { tiltable, copyable, motion } = env;
 
   // Tilt is a pointer affordance, and it has to stand down for reduced motion.
   useEffect(() => {
@@ -82,7 +77,6 @@ export default function CardStage({ children, back }: CardStageProps) {
     const still = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => {
       setEnv({
-        canDraw: hover.matches,
         tiltable: hover.matches && !still.matches,
         copyable: canCopyImage(),
         motion: !still.matches,
@@ -288,12 +282,10 @@ export default function CardStage({ children, back }: CardStageProps) {
         ? "Take the cursor back to export what you've drawn."
         : "Draw anywhere on the card, then take the cursor back."
       : flipped
-        ? "The reverse. Click the card to turn it back."
+        ? "The reverse. Turn the card back to see the front."
         : inked
           ? `${inked} stroke${inked === 1 ? "" : "s"} on the card. Take it with you.`
-          : canDraw
-            ? "Pick up a pen from the palette and doodle right on the card."
-            : "Save the card as an image, or turn it over.";
+          : "Pick up a pen and doodle right on the card, then take it with you.";
 
   const faceClass =
     "border border-ink bg-paper p-4 [backface-visibility:hidden] [-webkit-backface-visibility:hidden]";

@@ -21,11 +21,15 @@ export const site = {
   availability: "Open to summer 2027 internships",
   resumeUrl: "/resume.pdf",
   /**
-   * Path to a headshot in public/, or null for the placeholder frame.
-   * A static import would fail the build while the file is missing, so this
-   * stays a plain string: drop the file in public/ and set the path here.
+   * Headshot in public/, or null for the placeholder frame. Dimensions are
+   * carried alongside the path so next/image can size it without upscaling.
+   * Photo by Bryan Chatlien.
    */
-  photo: null as string | null,
+  photo: {
+    src: "/arnay.jpeg",
+    width: 320,
+    height: 303,
+  } as { src: string; width: number; height: number } | null,
   /**
    * The address printed on the card. Leave it null to show whatever host the
    * site is being served from; set it to override that with a tidier form

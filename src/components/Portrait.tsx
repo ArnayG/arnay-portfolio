@@ -10,10 +10,11 @@ export default function Portrait() {
     return (
       <div className="aspect-square w-full overflow-hidden border border-ink">
         <Image
-          src={site.photo}
+          src={site.photo.src}
           alt={`${site.firstName} ${site.lastName}`}
-          width={640}
-          height={640}
+          width={site.photo.width}
+          height={site.photo.height}
+          sizes="96px"
           priority
           className="h-full w-full object-cover grayscale contrast-125"
         />

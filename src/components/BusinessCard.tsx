@@ -83,6 +83,8 @@ export default function BusinessCard() {
       <div className="mt-4 flex flex-wrap items-center gap-2">
         <a
           href={site.resumeUrl}
+          target="_blank"
+          rel="noopener noreferrer"
           className="shadow-hard-sm inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-[11px] tracking-[0.15em] uppercase transition-transform hover:translate-x-px hover:translate-y-px"
         >
           Resume
