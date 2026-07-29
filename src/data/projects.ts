@@ -27,7 +27,7 @@ export const projects: Project[] = [
     title: "VEX Robotics Competition",
     category: "Robotics",
     description:
-      "Lead programmer and notebooker across four seasons. Built autonomous routines using PID loops, motion profiling, slew control, and sensor fusion (IMU and shaft encoders), and co-designed mechanisms through iterative CAD and FEA. VEX World Championship Division Champions and Indiana State Champions, with 44 judged awards and a national ranking of 14th out of 6,244 teams.",
+      "Lead programmer and notebooker across four seasons. Built autonomous routines using PID loops, motion profiling, slew control, and sensor fusion (IMU and shaft encoders), and co-designed mechanisms through iterative CAD and FEA. 2026 VEX Robotics World Championship Division Champions and Indiana State Champions, with 44 judged awards and a global ranking inside the top ten of 6,000+ teams.",
     stack: ["C++", "VEX V5"],
     period: "2022 — 2026",
   },

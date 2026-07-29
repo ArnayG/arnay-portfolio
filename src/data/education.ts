@@ -34,10 +34,10 @@ export const education: School[] = [
       { label: "AP", score: "13 exams, all 5s" },
     ],
     activities: [
-      "Co-President of the Computer Science Club — led the advanced cohort of 35+ students, running algorithm labs and ACSL prep cycles that qualified 20+ peers for All-Stars.",
-      "Lead programmer for the VEX Robotics team — Indiana State Champions, 44 judged awards, ranked 14th of 6,244 teams nationally.",
+      "Co-President of the Computer Science Club — led the advanced cohort of 35+ students, running ACSL preparation meetings that qualified 10+ peers for All-Stars.",
+      "Lead programmer and notebooker for the VEX Robotics team — 2026 VEX Robotics World Championship Division Champions and Indiana State Champions, with 44 judged awards and a global ranking inside the top ten of 6,000+ teams.",
       "Co-founded and taught the school's first VEX Robotics summer camp, for 20+ middle-school students.",
-      "Best Delegate at Georgetown's North American Invitational MUN — one of 40 recognised out of 3,300+ delegates.",
+      "Best Delegate at Georgetown's North American Invitational MUN — one of 40 recognised out of 3,300+ delegates — and at Dayton MUN, plus a Verbal Commendation at the Indiana University MUN conference.",
       "Summa Cum Laude inductee (top 10% by GPA) and twice AP Scholar with Distinction.",
     ],
   },
