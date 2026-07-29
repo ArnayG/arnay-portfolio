@@ -62,6 +62,8 @@ export default function BusinessCard() {
 
       <a
         href={site.resumeUrl}
+        target="_blank"
+        rel="noopener noreferrer"
         className="shadow-hard-sm mt-4 inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-[11px] tracking-[0.15em] uppercase transition-transform hover:translate-x-px hover:translate-y-px"
       >
         Resume

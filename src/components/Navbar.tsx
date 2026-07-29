@@ -34,6 +34,8 @@ export default function Navbar() {
             <ThemeToggle />
             <a
               href={site.resumeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="border border-ink px-3 py-1.5 font-mono text-[11px] tracking-[0.15em] uppercase transition-colors hover:bg-ink hover:text-paper"
             >
               Resume
