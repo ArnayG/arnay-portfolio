@@ -23,7 +23,7 @@ export const education: School[] = [
   {
     level: "middle",
     name: "Sycamore School",
-    period: "Pre-K to 2022",
+    period: "2012–2022",
     location: "Indianapolis, IN",
     logo: logos.sycamore,
   },
