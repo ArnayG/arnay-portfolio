@@ -36,7 +36,7 @@ export const education: School[] = [
     gpa: "4.0 / 4.0 unweighted",
     testScores: [
       { label: "SAT", score: "1600" },
-      { label: "AP", score: "13 exams, all 5s" },
+      { label: "AP", score: "- 13 exams, all 5s" },
     ],
     activities: [
       "Co-President of the Computer Science Club, leading the advanced cohort of 35+ students and running ACSL preparation meetings that qualified 10+ peers for All-Stars.",

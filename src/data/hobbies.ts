@@ -11,9 +11,10 @@ export const hobbies: Hobby[] = [
   },
   {
     name: "Golf",
-    detail: "Three seasons on the school's JV team.",
+    detail: "Three seasons on the school's team.",
   },
   {
     name: "Mechanical keyboards",
+    detail: "Building and customizing, with a focus on feel and sound. Built: Class60, Voice65, QK65, and Tofu60.",
   },
 ];
