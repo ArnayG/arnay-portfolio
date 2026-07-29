@@ -7,9 +7,9 @@ export default function Contact() {
       <DisplayHeading solid="Get in" outline="Touch" />
 
       <p className="mt-8 leading-relaxed text-ink-muted">
-        I&apos;m looking for software engineering internships. If you think
-        there&apos;s a fit, or you just want to talk about something I built, my
-        inbox is open.
+        I&apos;m always looking for opportunities to grow and explore new realms.
+        If you think there&apos;s a fit, or you just want to talk about something
+        I built, my inbox is open.
       </p>
 
       <a
