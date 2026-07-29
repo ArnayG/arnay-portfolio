@@ -1,3 +1,4 @@
+import CardStage from "@/components/CardStage";
 import CropMarks from "@/components/CropMarks";
 import Portrait from "@/components/Portrait";
 import { site } from "@/data/site";
@@ -13,9 +14,13 @@ function MetaRow({ label, value }: { label: string; value: string }) {
   );
 }
 
+/**
+ * The card itself is static markup; CardStage adds the interactive shell —
+ * the cursor-driven tilt and the export controls — around it.
+ */
 export default function BusinessCard() {
   return (
-    <div className="relative border border-ink bg-paper p-4">
+    <CardStage>
       <CropMarks />
 
       {/* Portrait sits beside the name rather than above it: a card-shaped
@@ -69,6 +74,6 @@ export default function BusinessCard() {
           [↓]
         </span>
       </a>
-    </div>
+    </CardStage>
   );
 }
