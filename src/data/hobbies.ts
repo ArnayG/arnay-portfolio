@@ -1,6 +1,6 @@
 export type Hobby = {
   name: string;
-  /** Optional — a hobby can stand on its name alone. */
+  /** Optional, since a hobby can stand on its name alone. */
   detail?: string;
 };
 

@@ -34,7 +34,7 @@ export default function ThemeToggle() {
     try {
       localStorage.setItem("theme", next ? "dark" : "light");
     } catch {
-      // Storage disabled — the toggle still works, it just won't persist.
+      // Storage disabled. The toggle still works, it just won't persist.
     }
     listeners.forEach((listener) => listener());
   }

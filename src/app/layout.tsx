@@ -29,7 +29,7 @@ const archivo = Archivo({
 const fullName = `${site.firstName} ${site.lastName}`;
 
 export const metadata: Metadata = {
-  title: `${fullName} — ${site.role}`,
+  title: `${fullName} · ${site.role}`,
   description: site.summary,
 };
 

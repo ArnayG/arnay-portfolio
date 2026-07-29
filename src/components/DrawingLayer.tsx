@@ -11,7 +11,7 @@ type Stroke = { tool: DrawTool; points: Point[] };
 /**
  * Pencil is a lighter tone rather than a translucent one. Drawing each new
  * segment on top of the last means overlapping round caps, and with alpha < 1
- * every join would darken into a visible bead — a solid blended colour keeps
+ * every join would darken into a visible bead. A solid blended colour keeps
  * the stroke even.
  */
 const TOOLS: Record<DrawTool, { width: number; inkMix: number }> = {
