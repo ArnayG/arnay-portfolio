@@ -12,7 +12,6 @@ const ICON = {
   viewBox: "0 0 16 16",
   fill: "none",
   stroke: "currentColor",
-  strokeWidth: 1.5,
   strokeLinecap: "round" as const,
   strokeLinejoin: "round" as const,
   "aria-hidden": true,
@@ -21,44 +20,54 @@ const ICON = {
 function CursorIcon() {
   return (
     <svg {...ICON} strokeWidth={1.2}>
-      <path fill="currentColor" d="M4 2.2l7.6 5.9-3.5.5 1.9 4.1-1.8.8-1.9-4.1L4 11.9z" />
+      <path
+        fill="currentColor"
+        d="M4 2.2l7.6 5.9-3.5.5 1.9 4.1-1.8.8-1.9-4.1L4 11.9z"
+      />
     </svg>
   );
 }
 
-function PencilIcon() {
+/** Ring weight stands in for stroke weight: hairline for pencil, bold for pen. */
+function ThinRingIcon() {
   return (
-    <svg {...ICON}>
-      <path d="M11.1 2.7l2.2 2.2-7.5 7.5-3 .8.8-3z" />
-      <path d="M9.9 3.9l2.2 2.2" />
+    <svg {...ICON} strokeWidth={1}>
+      <circle cx="8" cy="8" r="5" />
     </svg>
   );
 }
 
-function PenIcon() {
+function ThickRingIcon() {
   return (
-    <svg {...ICON}>
-      <path d="M13.3 2.7l-8 8L3.6 14l3.3-1.7 8-8z" />
-      <path d="M5.3 10.7l1.6 1.6" />
-      <path d="M10.7 5.3l1.6 1.6" />
+    <svg {...ICON} strokeWidth={3}>
+      <circle cx="8" cy="8" r="4.4" />
     </svg>
   );
 }
 
 function ClearIcon() {
   return (
-    <svg {...ICON}>
+    <svg {...ICON} strokeWidth={1.5}>
       <path d="M4.6 4.6l6.8 6.8" />
       <path d="M11.4 4.6l-6.8 6.8" />
     </svg>
   );
 }
 
-/** Paint-well positions, as percentages of the palette's viewBox. */
-const WELLS: { value: Tool; label: string; icon: () => React.ReactElement; left: string; top: string }[] = [
-  { value: "cursor", label: "Cursor", icon: CursorIcon, left: "22%", top: "62%" },
-  { value: "pencil", label: "Pencil", icon: PencilIcon, left: "26%", top: "31%" },
-  { value: "pen", label: "Pen", icon: PenIcon, left: "51%", top: "22%" },
+/**
+ * Paint-well positions as percentages of the palette's viewBox, kept well
+ * inside the outline and clear of the thumb hole at (75%, 50%).
+ */
+const WELLS: {
+  value: Tool;
+  label: string;
+  icon: () => React.ReactElement;
+  left: string;
+  top: string;
+}[] = [
+  { value: "pencil", label: "Pencil", icon: ThinRingIcon, left: "30%", top: "33%" },
+  { value: "pen", label: "Pen", icon: ThickRingIcon, left: "52%", top: "26%" },
+  { value: "cursor", label: "Cursor", icon: CursorIcon, left: "27%", top: "63%" },
 ];
 
 const WELL_BASE =
@@ -71,9 +80,9 @@ export default function ToolPalette({
   canClear,
 }: ToolPaletteProps) {
   return (
-    <div className="fixed right-6 bottom-6 z-50 h-32 w-44">
-      {/* The palette itself: outline only, so it reads as drawn rather than
-          rendered. evenodd punches a real thumb hole. */}
+    <div className="fixed right-8 bottom-8 z-50 h-40 w-52">
+      {/* Outline only, so it reads as drawn rather than rendered. evenodd
+          punches a real thumb hole. */}
       <svg
         viewBox="0 0 160 120"
         aria-hidden="true"
@@ -118,7 +127,7 @@ export default function ToolPalette({
         disabled={!canClear}
         aria-label="Erase all"
         title="Erase all"
-        style={{ left: "54%", top: "66%" }}
+        style={{ left: "50%", top: "62%" }}
         className={`${WELL_BASE} border-rule bg-paper text-ink-muted hover:border-mark hover:text-mark disabled:opacity-30 disabled:hover:border-rule disabled:hover:text-ink-muted`}
       >
         <ClearIcon />
