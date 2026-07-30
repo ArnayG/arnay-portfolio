@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <title>Arnay Garhyan</title>
+  <!--
+    The back of the business card, cut down to what survives in a browser tab:
+    the engine-turned rosette inside its registration marks.
+
+    The monogram is left off. Two letters at this size are a smudge, and an SVG
+    icon cannot load the display face in any case, so the clear centre the
+    initials sit in on the card stands in for them.
+
+    The rosette is thinned from the card's 22 ellipses (src/components/
+    Rosette.tsx) to 7, with strokes far heavier in proportion so they hold at a
+    tab's real pixel count. Seven is a floor, not a saving: at three the
+    crossings read as an atom rather than an engraving.
+
+    Source of truth for the whole icon set. favicon.ico and apple-icon.png are
+    generated from this file by scripts/icons.py; edit here and rerun that.
+  -->
+  <style>
+    :root {
+      --paper: #ffffff;
+      --ink: #0a0a0a;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #0a0a0a;
+        --ink: #f7f5f1;
+      }
+    }
+  </style>
+
+  <rect width="32" height="32" fill="var(--paper)" />
+
+  <g fill="none" stroke="var(--ink)">
+    <!-- Registration marks on the trim, as on the card. -->
+    <path d="M2 6V2h4M26 2h4v4M30 26v4h-4M6 30H2v-4" stroke-width="1.4" />
+
+    <g transform="translate(16 16)">
+      <circle r="12" stroke-width="1.5" />
+
+      <!-- One ellipse, rotated: the figure comes out of the overlaps. -->
+      <g stroke-width="0.65">
+        <ellipse rx="10.6" ry="3.8" />
+        <ellipse rx="10.6" ry="3.8" transform="rotate(25.71)" />
+        <ellipse rx="10.6" ry="3.8" transform="rotate(51.43)" />
+        <ellipse rx="10.6" ry="3.8" transform="rotate(77.14)" />
+        <ellipse rx="10.6" ry="3.8" transform="rotate(102.86)" />
+        <ellipse rx="10.6" ry="3.8" transform="rotate(128.57)" />
+        <ellipse rx="10.6" ry="3.8" transform="rotate(154.29)" />
+      </g>
+
+      <circle r="3" stroke-width="0.9" fill="var(--paper)" />
+    </g>
+  </g>
+</svg>
