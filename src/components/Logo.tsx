@@ -1,6 +1,7 @@
 import Image from "next/image";
 import CropMarks from "@/components/CropMarks";
 import type { LogoAsset } from "@/data/logos";
+import { asset } from "@/lib/basePath";
 
 type LogoProps = {
   logo: LogoAsset;
@@ -18,7 +19,7 @@ export default function Logo({ logo, className = "" }: LogoProps) {
     >
       <CropMarks size="sm" />
       <Image
-        src={logo.src}
+        src={asset(logo.src)}
         alt={logo.alt}
         width={logo.width}
         height={logo.height}
