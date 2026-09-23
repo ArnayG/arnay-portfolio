@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { site } from "@/data/site";
+import { asset } from "@/lib/basePath";
 
 /**
  * Renders the headshot when site.photo is set, otherwise a drafting-style
@@ -10,7 +11,7 @@ export default function Portrait() {
     return (
       <div className="aspect-square w-full overflow-hidden border border-ink">
         <Image
-          src={site.photo.src}
+          src={asset(site.photo.src)}
           alt={`${site.firstName} ${site.lastName}`}
           width={site.photo.width}
           height={site.photo.height}

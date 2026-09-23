@@ -1,6 +1,7 @@
 import Container from "@/components/Container";
 import ThemeToggle from "@/components/ThemeToggle";
 import { navLinks, site } from "@/data/site";
+import { asset } from "@/lib/basePath";
 
 export default function Navbar() {
   return (
@@ -33,7 +34,7 @@ export default function Navbar() {
           <div className="flex items-center gap-5">
             <ThemeToggle />
             <a
-              href={site.resumeUrl}
+              href={asset(site.resumeUrl)}
               target="_blank"
               rel="noopener noreferrer"
               className="border border-ink px-3 py-1.5 font-mono text-[11px] tracking-[0.15em] uppercase transition-colors hover:bg-ink hover:text-paper"

@@ -6,6 +6,7 @@ import Monogram from "@/components/Monogram";
 import Portrait from "@/components/Portrait";
 import SiteAddress from "@/components/SiteAddress";
 import { site } from "@/data/site";
+import { asset } from "@/lib/basePath";
 
 function MetaRow({ label, value }: { label: string; value: string }) {
   return (
@@ -76,7 +77,7 @@ export default function BusinessCard() {
       </ul>
 
       <a
-        href={site.resumeUrl}
+        href={asset(site.resumeUrl)}
         target="_blank"
         rel="noopener noreferrer"
         className="shadow-hard-sm mt-4 inline-flex items-center gap-2 border border-ink px-4 py-2 font-mono text-[11px] tracking-[0.15em] uppercase transition-transform hover:translate-x-px hover:translate-y-px"
